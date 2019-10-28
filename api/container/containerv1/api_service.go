@@ -27,7 +27,7 @@ type ContainerServiceAPI interface {
 }
 
 //ContainerService holds the client
-type csService struct {
+type CsService struct {
 	*client.Client
 }
 
@@ -64,47 +64,47 @@ func New(sess *session.Session) (ContainerServiceAPI, error) {
 		config.Endpoint = &ep
 	}
 
-	return &csService{
+	return &CsService{
 		Client: client.New(config, bluemix.ContainerService, tokenRefreher),
 	}, nil
 }
 
 //Albs implement albs API
-func (c *csService) Albs() Albs {
+func (c *CsService) Albs() Albs {
 	return newAlbAPI(c.Client)
 }
 
 //Clusters implements Clusters API
-func (c *csService) Clusters() Clusters {
+func (c *CsService) Clusters() Clusters {
 	return newClusterAPI(c.Client)
 }
 
 //Workers implements Cluster Workers API
-func (c *csService) Workers() Workers {
+func (c *CsService) Workers() Workers {
 	return newWorkerAPI(c.Client)
 }
 
 //WorkerPools implements Cluster WorkerPools API
-func (c *csService) WorkerPools() WorkerPool {
+func (c *CsService) WorkerPools() WorkerPool {
 	return newWorkerPoolAPI(c.Client)
 }
 
 //Subnets implements Cluster Subnets API
-func (c *csService) Subnets() Subnets {
+func (c *CsService) Subnets() Subnets {
 	return newSubnetAPI(c.Client)
 }
 
 //Webhooks implements Cluster WebHooks API
-func (c *csService) WebHooks() Webhooks {
+func (c *CsService) WebHooks() Webhooks {
 	return newWebhookAPI(c.Client)
 }
 
 //KubeVersions implements Cluster WebHooks API
-func (c *csService) KubeVersions() KubeVersions {
+func (c *CsService) KubeVersions() KubeVersions {
 	return newKubeVersionAPI(c.Client)
 }
 
 //Vlans implements DC Cluster Vlan API
-func (c *csService) Vlans() Vlans {
+func (c *CsService) Vlans() Vlans {
 	return newVlanAPI(c.Client)
 }
